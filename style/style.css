@@ -1,3 +1,6 @@
+body{
+    height: 83.5vh;
+}
 #footer{
     position: fixed;
     bottom: 2px;
@@ -20,4 +23,16 @@
 #js{
     color:skyblue;
     font-style: italic;
+}
+#wrapper{height: 100%;}
+#editor{
+    /* css debug properties */
+    background-color: blue;
+    color: white;
+    height: 100%;
+    display: flex;
+}
+#editor>div{border:2px solid grey;}
+#editor>div:nth-child(1){
+    flex-grow:1;
 }
