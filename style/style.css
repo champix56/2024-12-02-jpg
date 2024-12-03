@@ -12,4 +12,12 @@
     padding:15px;
     font-weight: 900;
     color: tomato;
+    text-decoration: underline grey;
+}
+#dot{
+    color:black;
+}
+#js{
+    color:skyblue;
+    font-style: italic;
 }
