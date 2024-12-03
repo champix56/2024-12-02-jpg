@@ -26,13 +26,17 @@ body{
 }
 #wrapper{height: 100%;}
 #editor{
-    /* css debug properties */
-    background-color: blue;
-    color: white;
     height: 100%;
     display: flex;
 }
-#editor>div{border:2px solid grey;}
+
 #editor>div:nth-child(1){
     flex-grow:1;
+}
+#editor>div{
+    padding: 5px 15px;
+}
+#editor>div:nth-child(2){
+    min-width:200px;
+    border-left:1px solid black;
 }
