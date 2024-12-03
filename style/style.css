@@ -5,12 +5,13 @@ div{
     color:blue;
 }
 #footer{
-    position: absolute;
+    position: fixed;
     bottom: 2px;
     text-align: center;
     width: 90%;
     left:5%;
     right: 5%;
+    z-index: 100;
 }
 .bold{
     font-weight: 900;
