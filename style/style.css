@@ -1,64 +1,71 @@
-#js-notification{
-    font-size: xx-large;
-    font-weight: 900;
-    background-color: tomato;
-    color: white;
-    text-align: center;
-    padding: 0 10px;
+#js-notification {
+  font-size: xx-large;
+  font-weight: 900;
+  background-color: tomato;
+  color: white;
+  text-align: center;
+  padding: 0 10px;
 }
 
-body{
-    height: 83.5vh;
+body {
+  height: 83.5vh;
 }
-#footer{
-    position: fixed;
-    bottom: 2px;
-    text-align: center;
-    width: 90%;
-    left:5%;
-    right: 5%;
-    z-index: 100;
+#footer {
+  position: fixed;
+  bottom: 2px;
+  text-align: center;
+  width: 90%;
+  left: 5%;
+  right: 5%;
+  z-index: 100;
 }
-#header{
-    font-size:25px;
-    padding:15px;
-    font-weight: 900;
-    color: tomato;
-    text-decoration: underline grey;
+#header {
+  font-size: 25px;
+  padding: 15px;
+  font-weight: 900;
+  color: tomato;
+  text-decoration: underline grey;
 }
-#dot{
-    color:black;
+#dot {
+  color: black;
 }
-#js{
-    color:skyblue;
-    font-style: italic;
+#js {
+  color: skyblue;
+  font-style: italic;
 }
-#wrapper{height: 100%;}
-#editor{
-    height: 100%;
-    display: flex;
-    text-align: center;
+#wrapper {
+  height: 100%;
+}
+#editor {
+  height: 100%;
+  display: flex;
+  text-align: center;
 }
 
-#editor>div:nth-child(1){
-    flex-grow:1;
+#editor > div:nth-child(1) {
+  flex-grow: 1;
 }
-#editor>div{
-    padding: 5px 15px;
+#editor > div {
+  padding: 5px 15px;
 }
-#editor>div:nth-child(2){
-    min-width:200px;
-    border-left:1px solid black;
+#editor > div:nth-child(2) {
+  min-width: 200px;
+  border-left: 1px solid black;
 }
-div.cols{
-    display:flex;
-    justify-content: space-between;
+div.cols {
+  display: flex;
+  justify-content: space-between;
 }
-div.cols>div{
-    width:49%;
-    text-align: center;
+div.cols > div {
+  width: 49%;
+  text-align: center;
 }
-div.cols>div input{
-    width:80px;
-    text-align: center;
+div.cols > div input {
+  width: 80px;
+  text-align: center;
+}
+@media print {
+  #editor-right, #navbar {
+    display: none;
+  }
 }
