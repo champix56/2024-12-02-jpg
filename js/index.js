@@ -6,6 +6,7 @@ function loadingDOM() {
   document
     .querySelector("button.btn-danger")
     .addEventListener("click", function (evt) {
+      evt.stopPropagation();
       console.log('button',evt);
       console.log("button du header clické");
     });
