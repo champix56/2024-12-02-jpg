@@ -1,3 +1,33 @@
+/**
+ * Liste des routes avec configuration
+ */
+var routes = [
+  {
+    name: "Thumbnail",
+    pathName: /\/thumbnail$/,
+    templateUrl: "/pages/thumbnail/thumbnail.html",
+    //loaderJs: loadThumbnail,
+  },
+  {
+    name: "Editor",
+    pathName: /\/editor((\/(?<id>\d+))|\/)?$/,
+    templateUrl: "/pages/editor/editor.html",
+    loaderJs: loadEditorEvent,
+  },
+  {
+    name: "Home",
+    pathName: /\/$/,
+    template: '\
+        <div id="home">\
+            <h2>Bienvenue</h2>\
+            <p>Voici le nouvel editeur de meme avec enregistrement REST</p>\
+        </div>\
+    ',
+  },
+];
+var errorRoutes = {
+  404: { name: "Not Found", templateUrl: "/pages/errors/404.html" },
+};
 /* besoins routeur
 public -> sur this
     +page actuelle champs lecture
@@ -8,17 +38,54 @@ privé pas sur this
     +modif contenu(loadEvents)
     +recuperation du contenu de page depuis le reseau
 */
-function Router(rootNode,rootFolderOfTemplates = "/pages") {
-  /*definitions locales(interne) des propriétés et fonctions */
-  var currentRoute = location.pathname;
+function Router(rootNode) {
+  /**
+   * current route object
+   */
+  var currentRoute = undefined;
+  /**
+   * set as currentRoute the routeObject who match the good regex or set error page as route
+   * @param {object} pathName
+   */
   function changePathName(pathName) {
+    var params = undefined;
+    var route = routes.find(function (r) {
+      var regRet = r.pathName.exec(pathName);
+      console.log(regRet);
+      if (regRet !== null) {
+        params = regRet.groups;
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (route == undefined) {
+      route = errorRoutes[404];
+    }
+    route.params = params;
     history.pushState(null, null, pathName);
-    currentRoute = location.pathname;
+    currentRoute = route;
   }
-  function loadContentInPage(eventLoader) {}
-  function getContentFromNetwork(contentUrl) {
+  /**
+   *
+   * @param {*} routeWithTemplate
+   */
+  function loadContentInPage(routeWithTemplate) {
+    rootNode.innerHTML = routeWithTemplate.template;
+    if (
+      routeWithTemplate.loaderJs !== undefined &&
+      routeWithTemplate.loaderJs !== null
+    ) {
+      routeWithTemplate.loaderJs(routeWithTemplate.params);
+    }
+  }
+  /**
+   * loading from network route Content
+   * @param {object} route route object
+   */
+  function getContentFromNetwork(route) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", contentUrl);
+    xhr.open("GET", route.templateUrl);
     xhr.onreadystatechange = function (evt) {
       if (xhr.readyState < XMLHttpRequest.DONE) {
         return;
@@ -27,7 +94,8 @@ function Router(rootNode,rootFolderOfTemplates = "/pages") {
         console.log("erreur" + xhr.status);
       }
       console.log(xhr.responseText);
-      rootNode.innerHTML=xhr.responseText;
+      route.template = xhr.responseText;
+      loadContentInPage(route);
     };
     xhr.send();
   }
@@ -49,19 +117,17 @@ function Router(rootNode,rootFolderOfTemplates = "/pages") {
   this.navigate = navigate;
   function navigate(pathName = "/") {
     changePathName(pathName);
-    var url = rootFolderOfTemplates;
-    switch (pathName) {
-      case "/thumbnail":
-        url += "/thumbnail/thumbnail.html";
-        break;
-      case "/editor":
-        url += "/editor/editor.html";
-        break;
-      default:
-        url += "/home/home.html";
-        break;
+    //chargement direct de template sans chargement reseau
+    if (currentRoute.template) {
+      loadContentInPage(currentRoute);
+    } else {
+      getContentFromNetwork(currentRoute);
     }
-    getContentFromNetwork(url);
-    loadContentInPage();
   }
+  //execution de la route courrante a l'initialisation
+  navigate(location.pathname);
 }
+var router = undefined;
+document.addEventListener("DOMContentLoaded", () => {
+  router = new Router(document.querySelector("#wrapper"));
+});
