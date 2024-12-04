@@ -10,7 +10,7 @@ var routes = [
   },
   {
     name: "Editor",
-    pathName: /\/editor((\/(?<id>\d+))|\/)?$/,
+    pathName: /\/edit((\/(?<id>\d+))|\/)?$/,
     templateUrl: "/pages/editor/editor.html",
     loaderJs: loadEditorEvent,
   },
