@@ -1,11 +1,26 @@
 <div id="thumbnail">
   <style>
-    #thumbnail h2 {
+    #thumbnail h5 {
       text-align: center;
     }
+    #thumbnail{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    #thumbnail>a>div{
+        width:170px;
+        height: 180px;
+       /* display: block;*/
+        display: flex;
+        flex-direction: column;
+    }
+    
   </style>
-  <h2>Meme id <span>-1</span></h2>
-  <div class="thumbnail-viewer">
+
+  <div class="thumbnail-viewer">  
+    <a href="/editor/-1">
+    <h5>Meme id <span>-1</span></h5>
     <svg
       width="100%"
       height="100%"
@@ -31,5 +46,6 @@
         I &hearts; JS
       </text>
     </svg>
+    </a>
   </div>
 </div>
