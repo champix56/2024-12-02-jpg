@@ -5,6 +5,7 @@ function loadingDOM() {
   document.querySelector("#js-notification").remove();
   document.querySelector("#header button").remove();
   loadNavbarEvents();
+  loadEditorEvent();
 }
 /**
  * Fonction de chargement des events de navbar
