@@ -1,21 +1,13 @@
 function loadingDOM() {
-  var js = document.querySelector("#js-notification");
-  js.style.backgroundColor = "GREEN";
-  js.innerHTML =
-    'le <span style="font-weight:900;color :blue;">JS</span> est OK';
-  document
-    .querySelector("button.btn-danger")
-    .addEventListener("click", function (evt) {
-      evt.stopPropagation();
-      console.log('button',evt);
-      console.log("button du header clické");
-    });
-    document
-    .querySelector("#header")
-    .addEventListener("click", function (evt) {
-      console.log('header',evt);
-      console.log("header clické");
-    });
+  document.querySelector("#js-notification").remove();
+  //document.querySelector("#header button").remove();
+  
+  document.querySelector("#header button").addEventListener("click", function (evt) {
+    console.log("header", evt);
+    console.log("header clické");
+  });
+  /*destruction du dom et des events contenus dans le dom de #header avec innerHTML*/
+  document.querySelector("#header button").innerHTML+="Bla bla";
 }
 
 document.addEventListener("DOMContentLoaded", loadingDOM);
