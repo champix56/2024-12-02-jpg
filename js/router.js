@@ -11,9 +11,13 @@ privé pas sur this
 function Router(rootNode, rootFolderOfTemplates = "/pages") {
   /*definitions locales(interne) des propriétés et fonctions */
   /**
-   * route courrante avec informations de route
+   * route courrante avec informations de route (url, template, param,...)
    */
-  var currentRoute = location.pathname;
+  var currentRoute = undefined;
+  /**
+   * change path url and store route as current and set params
+   * @param {string} pathName
+   */
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
     var route = {};
@@ -34,7 +38,7 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
     currentRoute = route;
   }
   /**
-   *
+   * chargement DOM du template
    * @param {object} routeObject
    */
   function loadContentInPage(routeObject) {
@@ -78,8 +82,7 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
   this.navigate = navigate;
   function navigate(pathName = "/") {
     changePathName(pathName);
-
-    getContentFromNetwork(route);
+    getContentFromNetwork(currentRoute);
   }
   navigate(location.pathname);
 }
