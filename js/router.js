@@ -10,13 +10,32 @@ privé pas sur this
 */
 function Router(rootNode, rootFolderOfTemplates = "/pages") {
   /*definitions locales(interne) des propriétés et fonctions */
+  /**
+   * route courrante avec informations de route
+   */
   var currentRoute = location.pathname;
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
-    currentRoute = location.pathname;
-  }/**
-   * 
-   * @param {object} routeObject 
+    var route = {};
+    route.url = rootFolderOfTemplates;
+    switch (pathName) {
+      case "/thumbnail":
+        route.url += "/thumbnail/thumbnail.html";
+        break;
+      case "/editor":
+        route.url += "/editor/editor.html";
+        route.loaderJs = loadEditorEvent;
+        break;
+      default:
+        route.url += "/home/home.html";
+        break;
+    }
+    route.pathName = pathName;
+    currentRoute = route;
+  }
+  /**
+   *
+   * @param {object} routeObject
    */
   function loadContentInPage(routeObject) {
     rootNode.innerHTML = routeObject.template;
@@ -59,21 +78,7 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
   this.navigate = navigate;
   function navigate(pathName = "/") {
     changePathName(pathName);
-    var route = {};
-    route.url = rootFolderOfTemplates;
 
-    switch (pathName) {
-      case "/thumbnail":
-        route.url += "/thumbnail/thumbnail.html";
-        break;
-      case "/editor":
-        route.url += "/editor/editor.html";
-        route.loaderJs = loadEditorEvent;
-        break;
-      default:
-        route.url += "/home/home.html";
-        break;
-    }
     getContentFromNetwork(route);
   }
   navigate(location.pathname);
