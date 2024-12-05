@@ -38,7 +38,7 @@ function Router(rootNode) {
    */
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
-    var route = routes.find(r=>r.path===pathName);
+    var route = routes.find((r) => r.path === pathName);
     route.pathName = pathName;
     currentRoute = route;
   }
@@ -87,7 +87,11 @@ function Router(rootNode) {
   this.navigate = navigate;
   function navigate(pathName = "/") {
     changePathName(pathName);
-    getContentFromNetwork(currentRoute);
+    if (undefined !== currentRoute.template) {
+      loadContentInPage(currentRoute);
+    } else {
+      getContentFromNetwork(currentRoute);
+    }
   }
   navigate(location.pathname);
 }
