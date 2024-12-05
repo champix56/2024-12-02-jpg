@@ -70,7 +70,7 @@ function Router(rootNode) {
         console.log("erreur" + xhr.status);
         return;
       }
-      console.log(xhr.responseText);
+      //console.log(xhr.responseText);
       routeObject.template = xhr.responseText;
       loadContentInPage(routeObject);
     };
