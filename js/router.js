@@ -1,10 +1,12 @@
 import { loadEditor } from "./editor.js";
+import { loaderThumbnail } from "./thumbnail.js";
 
 var routes = [
   {
     name: "Thumbnail",
     path: /^\/thumbnail$/,
     url: "/pages/thumbnail/thumbnail.html",
+    loaderJs:loaderThumbnail
   },
   {
     name: "Editor",
