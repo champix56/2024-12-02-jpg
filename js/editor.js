@@ -22,7 +22,7 @@ export function loadEditor(params) {
       loadCurrentMemeInForm();
     });
   } else {
-    promiseImage.then((arrayImages) => {
+    promiseImages.then((arrayImages) => {
       currentMeme = new Meme();
       updateSVG(currentMeme, documentSVGNode);
       loadSelectImagesInForm(arrayImages);
