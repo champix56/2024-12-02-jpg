@@ -1,0 +1,15 @@
+#thumbnail h5 {
+  text-align: center;
+}
+#thumbnail {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#thumbnail > div > a {
+  width: 170px;
+  height: 180px;
+  /* display: block;*/
+  display: flex;
+  flex-direction: column;
+}
