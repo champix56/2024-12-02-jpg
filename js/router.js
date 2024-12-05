@@ -26,7 +26,7 @@ privé pas sur this
     +modif contenu(loadEvents)
     +recuperation du contenu de page depuis le reseau
 */
-function Router(rootNode, rootFolderOfTemplates = "/pages") {
+function Router(rootNode) {
   /*definitions locales(interne) des propriétés et fonctions */
   /**
    * route courrante avec informations de route (url, template, param,...)
@@ -38,20 +38,7 @@ function Router(rootNode, rootFolderOfTemplates = "/pages") {
    */
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
-    var route = {};
-    route.url = rootFolderOfTemplates;
-    switch (pathName) {
-      case "/thumbnail":
-        route.url += "/thumbnail/thumbnail.html";
-        break;
-      case "/editor":
-        route.url += "/editor/editor.html";
-        route.loaderJs = loadEditorEvent;
-        break;
-      default:
-        route.url += "/home/home.html";
-        break;
-    }
+    var route = routes.find(r=>r.path===pathName);
     route.pathName = pathName;
     currentRoute = route;
   }
