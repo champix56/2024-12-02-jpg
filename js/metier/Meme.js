@@ -19,8 +19,12 @@ class Meme {
   constructor() {
     console.log("constructor de meme");
   }
+  /**
+   * enregistrement (POST ou PUT en fonction de l'id)
+   * @returns {Promise} promise de retour (stream lu) du fetch de sauvgarde
+   */
   save() {
-    fetch(
+    const promise = fetch(
       `http://localhost:5679${this.#endpoint}${
         undefined !== this.id ? "/" + this.id : ""
       }`,
@@ -31,14 +35,11 @@ class Meme {
         },
         body: JSON.stringify(this),
       }
-    )
-      .then((r) => r.json())
-      .then((o) => {
-        Object.assign(this, o);
-      });
-    // console.log("save " + this.id + " at " + this.#endpoint, this);
-    // this.publicSave();
-    // this.#privateSave();
+    ).then((r) => r.json());
+    promise.then((o) => {
+      Object.assign(this, o);
+    });
+    return promise;
   }
   publicSave() {
     console.log("public saving");
