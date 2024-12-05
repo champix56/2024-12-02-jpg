@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "lite-server"
+    "test": "lite-server",
+    "json": "json-server -p 5679 db/db.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "5.3.3",
-    "json-server": "^0.17.4",
+    "json-server": "0.17.4",
     "lite-server": "^2.6.1"
   }
 }
