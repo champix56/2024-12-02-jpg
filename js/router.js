@@ -1,18 +1,18 @@
 var routes = [
   {
     name: "Thumbnail",
-    path: "/thumbnail",
+    path: /^\/thumbnail$/,
     url: "/pages/thumbnail/thumbnail.html",
   },
   {
     name: "Editor",
-    path: "/edit",
+    path: /^\/edit((\/)|(\/(?<id>\d+)))?$/,
     url: "/pages/editor/editor.html",
     loaderJs: loadEditorEvent,
   },
   {
     name: "Home",
-    path: "/",
+    path: /\/?/,
     url: "/pages/home/home.html",
   },
 ];
@@ -38,7 +38,14 @@ function Router(rootNode) {
    */
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
-    var route = routes.find((r) => r.path === pathName);
+    var m;
+    var route = routes.find((r) =>{
+       m=r.path.exec( pathName);
+       return m!==null; 
+    });
+    if(undefined!==route){
+        route.params = m.groups;
+    }
     route.pathName = pathName;
     currentRoute = route;
   }
