@@ -1,3 +1,5 @@
+import { Meme } from "./Meme.js";
+
 class Memes extends Array {
   #endpoint = "/memes";
   constructor() {
@@ -17,5 +19,5 @@ class Memes extends Array {
       });
   }
 }
-const memes=new Memes();
-const promiseMemes=memes.load();
+export const memes=new Memes();
+export const promiseMemes=memes.load();

@@ -1,7 +1,9 @@
+import { initRouter, router } from "./router.js";
 /**
  * chargement de base de mon app
  */
 function loadingDOM() {
+  initRouter(document.getElementById("wrapper"));
   document.querySelector("#js-notification").remove();
   document.querySelector("#header button").remove();
   loadNavbarEvents();
@@ -26,4 +28,3 @@ function loadNavbarEvents() {
   });
 }
 document.addEventListener("DOMContentLoaded", loadingDOM);
-var router=new Router(document.getElementById('wrapper'));

@@ -1,3 +1,5 @@
+import { loadEditor } from "./editor.js";
+
 var routes = [
   {
     name: "Thumbnail",
@@ -26,7 +28,7 @@ privé pas sur this
     +modif contenu(loadEvents)
     +recuperation du contenu de page depuis le reseau
 */
-function Router(rootNode) {
+export function Router(rootNode) {
   /*definitions locales(interne) des propriétés et fonctions */
   /**
    * route courrante avec informations de route (url, template, param,...)
@@ -102,3 +104,5 @@ function Router(rootNode) {
   }
   navigate(location.pathname);
 }
+export const initRouter=(domNode)=>{router=new Router(domNode);}
+export let router;

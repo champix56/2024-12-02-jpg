@@ -1,12 +1,16 @@
+import { promiseImages, images } from './metier/Images.js';
+import { Meme } from './metier/Meme.js'
+import { promiseMemes } from './metier/Memes.js';
+
 let currentMeme = new Meme();
 let documentSVGNode = undefined;
-function loadEditor(params) {
+export function loadEditor(params) {
   console.log(params);
   documentSVGNode = document.querySelector("svg");
   loadEditorEvent();
 
   if (undefined !== params.id) {
-    Promise.all([promiseImage, promiseMemes]).then((a_i_m) => {
+    Promise.all([promiseImages, promiseMemes]).then((a_i_m) => {
       currentMeme = a_i_m[1].find((m) => m.id === Number(params.id));
       if (undefined === currentMeme) {
         //meme avec id innexistant dans le list

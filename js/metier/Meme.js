@@ -1,7 +1,7 @@
 /**
  * class de gestion d'un meme
  */
-class Meme {
+export class Meme {
   id = undefined;
   text = "";
   x = 0;
@@ -48,5 +48,5 @@ class Meme {
     console.log("private saving");
   }
 }
-let meme = new Meme();
+//let meme = new Meme();
 //meme.save();

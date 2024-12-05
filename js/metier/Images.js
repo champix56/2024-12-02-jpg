@@ -28,5 +28,5 @@ class Images extends Array {
       .then((a) => Object.assign(this, a));
   }
 }
-const images = new Images();
-const promiseImage=images.load();
+export const images = new Images();
+export const promiseImages=images.load();
