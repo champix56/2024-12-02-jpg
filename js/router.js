@@ -8,7 +8,7 @@ var routes = [
     name: "Editor",
     path: /^\/edit((\/)|(\/(?<id>\d+)))?$/,
     url: "/pages/editor/editor.html",
-    loaderJs: loadEditorEvent,
+    loaderJs: loadEditor,
   },
   {
     name: "Home",
@@ -56,7 +56,7 @@ function Router(rootNode) {
   function loadContentInPage(routeObject) {
     rootNode.innerHTML = routeObject.template;
     if (typeof routeObject.loaderJs === "function") {
-      routeObject.loaderJs();
+      routeObject.loaderJs(currentRoute.params);
     }
   }
   function getContentFromNetwork(routeObject) {
