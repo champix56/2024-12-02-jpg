@@ -9,6 +9,7 @@ function loadEditor(params) {
     Promise.all([promiseImage, promiseMemes]).then((a_i_m) => {
       currentMeme = a_i_m[1].find((m) => m.id === Number(params.id));
       if (undefined === currentMeme) {
+        //meme avec id innexistant dans le list
         return router.navigate();
       }
       updateSVG(currentMeme, documentSVGNode);
