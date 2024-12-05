@@ -6,7 +6,8 @@ var routes = [
     name: "Thumbnail",
     path: /^\/thumbnail$/,
     url: "/pages/thumbnail/thumbnail.html",
-    loaderJs:loaderThumbnail
+    loaderJs: loaderThumbnail,
+    cssFile: "/pages/thumbnail/thumbnail.css",
   },
   {
     name: "Editor",
@@ -43,12 +44,12 @@ export function Router(rootNode) {
   function changePathName(pathName) {
     history.pushState(null, null, pathName);
     var m;
-    var route = routes.find((r) =>{
-       m=r.path.exec( pathName);
-       return m!==null; 
+    var route = routes.find((r) => {
+      m = r.path.exec(pathName);
+      return m !== null;
     });
-    if(undefined!==route){
-        route.params = m.groups;
+    if (undefined !== route) {
+      route.params = m.groups;
     }
     route.pathName = pathName;
     currentRoute = route;
@@ -59,9 +60,23 @@ export function Router(rootNode) {
    */
   function loadContentInPage(routeObject) {
     rootNode.innerHTML = routeObject.template;
+    loadStyleSheet(routeObject);
     if (typeof routeObject.loaderJs === "function") {
       routeObject.loaderJs(currentRoute.params);
     }
+  }
+  function loadStyleSheet(route) {
+    if (undefined === route.cssFile) {
+      return;
+    }
+    if (document.head.querySelector('link[href="' + route.cssFile + '"]')) {
+      console.log("css deja présent");
+      return;
+    }
+    var linkTag = document.createElement("link");
+    linkTag.rel = "stylesheet";
+    linkTag.href = route.cssFile;
+    document.head.appendChild(linkTag);
   }
   function getContentFromNetwork(routeObject) {
     var xhr = new XMLHttpRequest();
@@ -106,5 +121,7 @@ export function Router(rootNode) {
   }
   navigate(location.pathname);
 }
-export const initRouter=(domNode)=>{router=new Router(domNode);}
+export const initRouter = (domNode) => {
+  router = new Router(domNode);
+};
 export let router;
