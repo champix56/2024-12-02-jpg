@@ -6,40 +6,29 @@ function loadEditor(params) {
     loadSelectImagesInForm(arrayImages);
   });
 }
-
+function treatInputStringEventChange(evt){
+  currentMeme[evt.target.name]=evt.target.value;
+}
+function treatInputNumberEventChange(evt){
+  currentMeme[evt.target.name]=parseInt(evt.target.value);
+}
+function treatCheckEventChange(evt){
+  currentMeme[evt.target.name]=evt.target.checked;
+}
 function loadEditorEvent() {
   document.forms["editor-form"].addEventListener("submit", function (evt) {
     evt.preventDefault();
     console.log("form submit");
   });
-  document.forms["editor-form"]["text"].addEventListener("input", function (evt) {
-    currentMeme.text=evt.target.value;
-  });
-  document.forms["editor-form"]["imageId"].addEventListener("change", function (evt) {
-    currentMeme.imageId=Number(evt.target.value);
-  });
-  document.forms["editor-form"]["x"].addEventListener("change", function (evt) {
-    currentMeme.x=parseInt( evt.target.value);
-  });
-  document.forms["editor-form"]["y"].addEventListener("change", function (evt) {
-    currentMeme.y=parseInt(evt.target.value);
-  });
-  document.forms["editor-form"]["color"].addEventListener("change", function (evt) {
-    currentMeme.color=evt.target.value;
-  });
-  document.forms["editor-form"]["fontSize"].addEventListener("change", function (evt) {
-    currentMeme.fontSize=parseInt(evt.target.value);
-    debugger;
-  });
-  document.forms["editor-form"]["fontWeight"].addEventListener("change", function (evt) {
-    currentMeme.fontWeight=evt.target.value;
-  });
-  document.forms["editor-form"]["underline"].addEventListener("change", function (evt) {
-    currentMeme.underline=evt.target.checked;
-  });
-  document.forms["editor-form"]["italic"].addEventListener("change", function (evt) {
-    currentMeme.italic=evt.target.checked;
-  });
+  document.forms["editor-form"]["text"].addEventListener("input", treatInputStringEventChange);
+  document.forms["editor-form"]["imageId"].addEventListener("change", treatInputNumberEventChange);
+  document.forms["editor-form"]["x"].addEventListener("change", treatInputNumberEventChange);
+  document.forms["editor-form"]["y"].addEventListener("change",treatInputNumberEventChange );
+  document.forms["editor-form"]["color"].addEventListener("change", treatInputStringEventChange);
+  document.forms["editor-form"]["fontSize"].addEventListener("change",treatInputNumberEventChange);
+  document.forms["editor-form"]["fontWeight"].addEventListener("change", treatInputStringEventChange);
+  document.forms["editor-form"]["underline"].addEventListener("change", treatCheckEventChange);
+  document.forms["editor-form"]["italic"].addEventListener("change", treatCheckEventChange);
 }
 /**
  *
