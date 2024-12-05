@@ -1,6 +1,8 @@
 let currentMeme = new Meme();
+let documentSVGNode=undefined;
 function loadEditor(params) {
   console.log(params);
+  documentSVGNode=document.querySelector('svg');
   loadEditorEvent();
   promiseImage.then((arrayImages) => {
     loadSelectImagesInForm(arrayImages);
@@ -11,6 +13,7 @@ function treatInputStringEventChange(evt) {
 }
 function treatInputNumberEventChange(evt) {
   currentMeme[evt.target.name] = parseInt(evt.target.value);
+  updateCurrent(currentMeme,documentSVGNode);
 }
 function treatCheckEventChange(evt) {
   currentMeme[evt.target.name] = evt.target.checked;
@@ -47,3 +50,30 @@ const loadSelectImagesInForm = (images) => {
   });
   // debugger;
 };
+/**
+ * 
+ * @param {Meme} meme 
+ * @param {HTMLElement} nodesvg 
+ */
+const updateCurrent=(meme,nodesvg)=>{
+  const img=images.find(i=>i.id===meme.imageId)
+  nodesvg.setAttributeNS('http://www.w3.org/2000/svg','xlink:href',`0 0 ${undefined!==img?img.w:500} ${undefined!==img?img.h:500}`);
+  nodesvg.innerHTML="";
+  // const t=nodesvg.getElementsByTagNameNS("http://www.w3.org/2000/svg","text");
+  const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+
+  t.setAttribute("x",meme.x);
+  t.setAttribute("y",meme.y);
+  t.innerHTML=meme.text;
+
+  nodesvg.appendChild(t);
+  if(undefined!==img){
+    const image=document.createElementNS("http://www.w3.org/2000/svg","image");
+    image.setAttribute("x",0);
+    image.setAttribute("y",0);
+    image.setAttributeNS("http://www.w3.org/1999/xlink", "href",img.url);
+    nodesvg.insertBefore(image,t);
+  }
+
+
+}
