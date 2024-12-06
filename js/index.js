@@ -2,6 +2,9 @@
  * chargement de base de mon app
  */
 function loadingDOM() {
+  console.log('====================================');
+  console.log('%c%s','font-size:xx-large;text-decoration:underline;color:skyblue;',"DOM CHARGE");
+  console.log('====================================');
   document.querySelector("#js-notification").remove();
   document.querySelector("#header button").remove();
   loadNavbarEvents();
