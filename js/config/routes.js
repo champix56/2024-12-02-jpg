@@ -7,6 +7,7 @@ export const routes = [
       path: /^\/thumbnail$/,
       url: "/pages/thumbnail/thumbnail.html",
       loaderJs:loadThumbnail,
+      cssFile:"/pages/thumbnail/thumbnail.css"
     },
     {
       name: "Editor",

@@ -77,9 +77,24 @@ function Router(rootNode) {
    */
   function loadContentInPage(routeObject) {
     rootNode.innerHTML = routeObject.template;
+    loadStyleSheet(routeObject);
     if (typeof routeObject.loaderJs === "function") {
       routeObject.loaderJs(currentRoute.params);
     }
+  }
+  /**
+   * chargement conditionnel des feuille de style de la route sur champs cssFile dans la route
+   * @param {object} route 
+   */
+  function loadStyleSheet(route){
+      if(undefined===route.cssFile){return;}
+      if(null!==document.head.querySelector('link[href="'+route.cssFile+'"]')){
+        return;
+      }
+      const link=document.createElement('link');
+      link.rel="stylesheet";
+      link.href=route.cssFile;
+      document.head.appendChild(link);
   }
   function getContentFromNetwork(routeObject) {
     const xhr = new XMLHttpRequest();
