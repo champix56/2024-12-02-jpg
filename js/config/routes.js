@@ -14,6 +14,7 @@ export const routes = [
       path: /^\/edit((\/)|(\/(?<id>\d+)))?$/,
       url: "/pages/editor/editor.html",
       loaderJs: loadEditor,
+      cssFile:"/pages/editor/editor.css",
     },
     {
       name: "Home",

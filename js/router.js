@@ -49,6 +49,7 @@ function Router(rootNode) {
   /**
    * route courrante avec informations de route (url, template, param,...)
    */
+  
   let currentRoute = undefined;
   /**
    * change path url and store route as current and set params
