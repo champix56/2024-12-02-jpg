@@ -1,5 +1,5 @@
 let routes=undefined;
-var errorsRoutes = {
+const errorsRoutes = {
   404: {
     name: "error 404 not found",
     url: "/pages/errors/404.html",
@@ -49,7 +49,7 @@ function Router(rootNode) {
   /**
    * route courrante avec informations de route (url, template, param,...)
    */
-  var currentRoute = undefined;
+  let currentRoute = undefined;
   /**
    * change path url and store route as current and set params
    * @param {string} pathName
@@ -57,8 +57,8 @@ function Router(rootNode) {
   function changePathName(pathName) {
     if (currentRoute === undefined) {
       history.pushState(null, null, pathName);
-      var m;
-      var route = routes.find((r) => {
+      let m;
+      const route = routes.find((r) => {
         m = r.path.exec(pathName);
         return m !== null;
       });
@@ -82,7 +82,7 @@ function Router(rootNode) {
     }
   }
   function getContentFromNetwork(routeObject) {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open("GET", routeObject.url);
     xhr.onreadystatechange = function (evt) {
       if (xhr.readyState < XMLHttpRequest.DONE) {
