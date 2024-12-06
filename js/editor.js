@@ -132,13 +132,13 @@ const updateSVG = (meme, svgRootNode) => {
   }
 };
 const updateForm = () => {
-  document.forms["editor-form"]["text"].value = meme.text;
-  document.forms["editor-form"]["x"].value = meme.x;
-  document.forms["editor-form"]["y"].value = meme.y;
-  document.forms["editor-form"]["color"].value = meme.color;
-  document.forms["editor-form"]["imageId"].value = meme.imageId;
-  document.forms["editor-form"]["fontWeight"].value = meme.fontWeight;
-  document.forms["editor-form"]["fontSize"].value = meme.fontSize;
-  document.forms["editor-form"]["italic"].checked = meme.italic;
-  document.forms["editor-form"]["underline"].checked = meme.underline;
+  document.forms["editor-form"]["text"].value = currentMeme.text;
+  document.forms["editor-form"]["x"].value = currentMeme.x;
+  document.forms["editor-form"]["y"].value = currentMeme.y;
+  document.forms["editor-form"]["color"].value = currentMeme.color;
+  document.forms["editor-form"]["imageId"].value = currentMeme.imageId;
+  document.forms["editor-form"]["fontWeight"].value = currentMeme.fontWeight;
+  document.forms["editor-form"]["fontSize"].value = currentMeme.fontSize;
+  document.forms["editor-form"]["italic"].checked = currentMeme.italic;
+  document.forms["editor-form"]["underline"].checked = currentMeme.underline;
 };
