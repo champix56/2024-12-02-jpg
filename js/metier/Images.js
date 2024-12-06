@@ -27,9 +27,12 @@ class Images extends Array {
         return r.json();
       })
       .then((a) =>{
+        console.groupCollapsed('find Images');
+        console.trace(a);
         console.table(a);
         Object.assign(this, a);
         console.timeEnd("load-images");
+        console.groupEnd();
         return this;
       });
   }
