@@ -29,7 +29,8 @@ class Images extends Array {
       .then((a) =>{
         console.table(a);
         Object.assign(this, a);
-        console.timeEnd("load-images")
+        console.timeEnd("load-images");
+        return this;
       });
   }
 }
