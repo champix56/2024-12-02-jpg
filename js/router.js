@@ -1,21 +1,4 @@
-var routes = [
-  {
-    name: "Thumbnail",
-    path: /^\/thumbnail$/,
-    url: "/pages/thumbnail/thumbnail.html",
-  },
-  {
-    name: "Editor",
-    path: /^\/edit((\/)|(\/(?<id>\d+)))?$/,
-    url: "/pages/editor/editor.html",
-    loaderJs: loadEditor,
-  },
-  {
-    name: "Home",
-    path: /^\/?$/,
-    url: "/pages/home/home.html",
-  },
-];
+let routes=undefined;
 var errorsRoutes = {
   404: {
     name: "error 404 not found",
@@ -148,7 +131,8 @@ function Router(rootNode) {
   navigate(location.pathname);
 }
 export let router;
-export const initRouter=(routerDomNode)=>{
+export const initRouter=(routesConfig,routerDomNode)=>{
+  routes=routesConfig;
   router=new Router(routerDomNode);
 }
 

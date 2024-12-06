@@ -1,4 +1,5 @@
-import {router, initRouter} from './router.js';
+import { routes } from './config/routes.js';
+import { router, initRouter } from './router.js';
 /**
  * chargement de base de mon app
  */
@@ -6,7 +7,7 @@ function loadingDOM() {
   console.log('====================================');
   console.log('%c%s','font-size:xx-large;text-decoration:underline;color:skyblue;',"DOM CHARGE");
   console.log('====================================');
-  initRouter(document.getElementById('wrapper'));
+  initRouter(routes,document.getElementById('wrapper'));
   document.querySelector("#js-notification").remove();
   document.querySelector("#header button").remove();
   loadNavbarEvents();
