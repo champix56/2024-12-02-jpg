@@ -35,13 +35,13 @@ var errorsRoutes = {
   },
   500: {
     name: "error 500 internal server error",
-    url: "/pages/errors/404.html",
+    url: "/pages/errors/500.html",
     status: 500,
     statusText: "internal server error",
     loaderJs: function () {
       document.title = `${location.href} ${this.status} ${this.statusText}`;
       console.error(this.name + " chemin :" + this.pathName, location.href);
-      document.querySelectorAll("#wrapper a").innerHTML = this.message;
+      document.querySelector("#message").innerHTML = this.message;
       document.querySelectorAll("#wrapper a").forEach((a) =>
         a.addEventListener("click", (evt) => {
           evt.preventDefault();
