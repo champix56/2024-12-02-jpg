@@ -20,6 +20,16 @@ var errorsRoutes = {
   404: {
     name: "error 404 not found",
     url: "/pages/errors/404.html",
+    status:404,
+    statusText:'not found',
+    loaderJs:function(){
+      document.title=`${location.href} ${this.status} ${this.statusText}`;
+      console.warn(this.name+" chemin :"+this.pathName,location.href);
+      document.querySelectorAll('#wrapper a').forEach(a=>a.addEventListener('click',evt=>{
+        evt.preventDefault();
+        router.navigate('/');
+      }))
+    }
   },
 };
 /* besoins routeur
