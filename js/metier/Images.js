@@ -37,5 +37,5 @@ class Images extends Array {
       });
   }
 }
-const images = new Images();
-const promiseImages=images.load();
+export const images = new Images();
+export const promiseImages=images.load();

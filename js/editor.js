@@ -1,9 +1,12 @@
+import { images, promiseImages } from "./metier/Images.js";
+import { Meme } from "./metier/Meme.js";
+import { promiseMemes } from "./metier/Memes.js";
+
 let currentMeme = new Meme();
 let editorRootSvg = undefined;
-function loadEditor(params) {
+export function loadEditor(params) {
   editorRootSvg = document.querySelector("#wrapper svg");
   console.log(params);
-
   loadEditorEvent();
   const promiseRessources=Promise.all([promiseImages,promiseMemes])
   .then((arrayImagesMemes) => {
@@ -11,7 +14,7 @@ function loadEditor(params) {
     currentMeme=arrayImagesMemes[1].find(m=>m.id===Number(params.id));
     if(undefined!==params.id && undefined===currentMeme){
       //404 NOT FOUND
-      router.navigate(404);
+      return router.navigate(404);
     }
     if(undefined===currentMeme){currentMeme=new Meme();}
     updateForm();

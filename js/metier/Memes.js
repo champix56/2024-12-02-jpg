@@ -1,3 +1,5 @@
+import { Meme } from "./Meme.js";
+
 class Memes extends Array {
   static #endpoint = "/memes";
   static get endpoint() {
@@ -37,5 +39,5 @@ class Memes extends Array {
       });
   }
 }
-var memes = new Memes();
-var promiseMemes = memes.load();
+export const  memes = new Memes();
+export const promiseMemes = memes.load();
