@@ -5,8 +5,15 @@ function loadEditor(params) {
   console.log(params);
 
   loadEditorEvent();
-  promiseImages.then((arrayImages) => {
-    loadSelectImagesInForm(arrayImages);
+  const promiseRessources=Promise.all([promiseImages,promiseMemes])
+  .then((arrayImagesMemes) => {
+    loadSelectImagesInForm(arrayImagesMemes[0]);
+    currentMeme=arrayImagesMemes[1].find(m=>m.id===Number(params.id));
+    if(undefined!==params.id && undefined===currentMeme){
+      //404 NOT FOUND
+      router.navigate('/edit');
+    }
+    if(undefined===currentMeme){currentMeme=new Meme();}
     updateForm();
     updateSVG(currentMeme, editorRootSvg);
   });
