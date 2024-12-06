@@ -147,3 +147,8 @@ function Router(rootNode) {
   }
   navigate(location.pathname);
 }
+export let router;
+export const initRouter=(routerDomNode)=>{
+  router=new Router(routerDomNode);
+}
+
