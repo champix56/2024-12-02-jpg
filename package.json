@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "lite-server",
+    "start": "npm run json | npm run test",
     "json": "json-server -p 5679 db/db.json"
   },
   "keywords": [],
