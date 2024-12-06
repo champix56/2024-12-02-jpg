@@ -29,4 +29,4 @@ class Images extends Array {
   }
 }
 const images = new Images();
-const promiseImage=images.load();
+const promiseImages=images.load();

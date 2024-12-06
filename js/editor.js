@@ -2,7 +2,7 @@ let currentMeme = new Meme();
 function loadEditor(params) {
   console.log(params);
   loadEditorEvent();
-  promiseImage.then((arrayImages) => {
+  promiseImages.then((arrayImages) => {
     loadSelectImagesInForm(arrayImages);
   });
 }
