@@ -53,6 +53,14 @@ function loadEditorEvent() {
     evt.preventDefault();
     currentMeme.save();
   });
+  document.forms["editor-form"].addEventListener("reset", function (evt) {
+    evt.preventDefault();
+    currentMeme.reload().then(r=>{
+      currentMeme=r;
+      loadCurrentMemeInForm();
+      updateSVG(r,documentSVGNode);
+    });
+  });
   document.forms["editor-form"]["text"].addEventListener("input",treatInputStringEventChange);
   document.forms["editor-form"]["imageId"].addEventListener("change",treatInputNumberEventChange);
   document.forms["editor-form"]["x"].addEventListener("change",treatInputNumberEventChange);

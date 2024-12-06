@@ -41,6 +41,20 @@ class Meme {
     });
     return promise;
   }
+  reload() {
+    if (undefined === this.id) {
+      return new Promise((resolved,rejected) => {
+        Object.assign(this, new Meme());
+        resolved(this);
+      });
+    } else {
+      return fetch(`http://localhost:5679${this.#endpoint}/${this.id}`)
+        .then((r) => r.json())
+        .then((o) => {
+          return Object.assign(this, o);
+        });
+    }
+  }
   publicSave() {
     console.log("public saving");
   }
