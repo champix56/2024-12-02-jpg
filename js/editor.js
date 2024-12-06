@@ -3,9 +3,12 @@ let editorRootSvg = undefined;
 function loadEditor(params) {
   editorRootSvg = document.querySelector("#wrapper svg");
   console.log(params);
+
   loadEditorEvent();
   promiseImages.then((arrayImages) => {
     loadSelectImagesInForm(arrayImages);
+    updateForm();
+    updateSVG(currentMeme, editorRootSvg);
   });
 }
 function treatInputStringEventChange(evt) {
@@ -119,8 +122,23 @@ const updateSVG = (meme, svgRootNode) => {
     /*const href=document.createAttributeNS("http://www.w3.org/1999/xlink",'xlink:href');
     href.value=img.url;
     imageSVG.setAttributeNodeNS(href);*/
-    imageSVG.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", img.url);
+    imageSVG.setAttributeNS(
+      "http://www.w3.org/1999/xlink",
+      "xlink:href",
+      img.url
+    );
 
     svgRootNode.insertBefore(imageSVG, text);
   }
+};
+const updateForm = () => {
+  document.forms["editor-form"]["text"].value = meme.text;
+  document.forms["editor-form"]["x"].value = meme.x;
+  document.forms["editor-form"]["y"].value = meme.y;
+  document.forms["editor-form"]["color"].value = meme.color;
+  document.forms["editor-form"]["imageId"].value = meme.imageId;
+  document.forms["editor-form"]["fontWeight"].value = meme.fontWeight;
+  document.forms["editor-form"]["fontSize"].value = meme.fontSize;
+  document.forms["editor-form"]["italic"].checked = meme.italic;
+  document.forms["editor-form"]["underline"].checked = meme.underline;
 };
