@@ -1,4 +1,8 @@
+/**
+ * class du webComponent horloge
+ */
 export class Horloge extends HTMLElement {
+  #interval=undefined;
     constructor(){
         super();
         const templateClone = document.querySelector('#horloge-template').content.children[0].cloneNode(true);
@@ -6,8 +10,11 @@ export class Horloge extends HTMLElement {
     }
   // The browser calls this method when the element is
   // added to the DOM.
+  /**
+   * fonction executé lors de la connexion(customElement.defined)
+   */
   connectedCallback() {
-    setInterval(() => {
+    this.#interval=setInterval(() => {
       // Create a Date object representing the current date.
       const now = new Date( Date.now());
 
@@ -16,6 +23,11 @@ export class Horloge extends HTMLElement {
       this.querySelector('a').innerHTML = now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     }, 1000);
   }
+  disconnectedCallback(){
+    clearInterval(this.#interval);
+  }
 }
 
 
+//https://ultimatecourses.com/blog/lifecycle-hooks-in-web-components#disconnectedcallback
+//demo des cycles de vie
