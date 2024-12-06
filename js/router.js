@@ -24,7 +24,7 @@ var errorsRoutes = {
     statusText:'not found',
     loaderJs:function(){
       document.title=`${location.href} ${this.status} ${this.statusText}`;
-      console.warn(this.name+" chemin :"+this.pathName,location.href);
+      console.error(this.name+" chemin :"+this.pathName,location.href);
       document.querySelectorAll('#wrapper a').forEach(a=>a.addEventListener('click',evt=>{
         evt.preventDefault();
         router.navigate('/');
