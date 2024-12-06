@@ -12,10 +12,16 @@ var routes = [
   },
   {
     name: "Home",
-    path: /\/?/,
+    path: /^\/?$/,
     url: "/pages/home/home.html",
   },
 ];
+var errorsRoutes = {
+  404: {
+    name: "error 404 not found",
+    url: "/pages/errors/404.html",
+  },
+};
 /* besoins routeur
 public -> sur this
     +page actuelle champs lecture
@@ -37,17 +43,22 @@ function Router(rootNode) {
    * @param {string} pathName
    */
   function changePathName(pathName) {
-    history.pushState(null, null, pathName);
-    var m;
-    var route = routes.find((r) =>{
-       m=r.path.exec( pathName);
-       return m!==null; 
-    });
-    if(undefined!==route){
+    if (currentRoute === undefined) {
+      history.pushState(null, null, pathName);
+      var m;
+      var route = routes.find((r) => {
+        m = r.path.exec(pathName);
+        return m !== null;
+      });
+      if (undefined !== route) {
         route.params = m.groups;
+      }
+      else{
+        route=errorsRoutes[404];
+      }
+      currentRoute = route;
     }
-    route.pathName = pathName;
-    currentRoute = route;
+    currentRoute.pathName = pathName;
   }
   /**
    * chargement DOM du template
@@ -93,7 +104,12 @@ function Router(rootNode) {
    */
   this.navigate = navigate;
   function navigate(pathName = "/") {
+    currentRoute = undefined;
+    if (Number.isInteger(pathName)) {
+      currentRoute = errorsRoutes[pathName];
+    }
     changePathName(pathName);
+
     if (undefined !== currentRoute.template) {
       loadContentInPage(currentRoute);
     } else {

@@ -11,7 +11,7 @@ function loadEditor(params) {
     currentMeme=arrayImagesMemes[1].find(m=>m.id===Number(params.id));
     if(undefined!==params.id && undefined===currentMeme){
       //404 NOT FOUND
-      router.navigate('/edit');
+      router.navigate(404);
     }
     if(undefined===currentMeme){currentMeme=new Meme();}
     updateForm();
