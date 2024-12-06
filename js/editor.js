@@ -1,7 +1,7 @@
 import { updateSVG } from "./commonsSvgFunctions.js";
 import { promiseImages } from "./metier/Images.js";
 import { Meme } from "./metier/Meme.js";
-import { promiseMemes } from "./metier/Memes.js";
+import { memes, promiseMemes } from "./metier/Memes.js";
 
 let currentMeme = new Meme();
 let editorRootSvg = undefined;
@@ -37,7 +37,7 @@ function treatCheckEventChange(evt) {
 function loadEditorEvent() {
   document.forms["editor-form"].addEventListener("submit", function (evt) {
     evt.preventDefault();
-    currentMeme.save();
+    currentMeme.save().then(m=>memes.addMeme(m));
   });
   document.forms["editor-form"]["text"].addEventListener(
     "input",

@@ -21,7 +21,7 @@ export class Meme {
   }
   /**
    * enregistrement (POST ou PUT en fonction de l'id)
-   * @returns {Promise} promise de retour (stream lu) du fetch de sauvgarde
+   * @returns {Promise<Meme>} promise de retour (stream lu) du fetch de sauvgarde
    */
   save() {
     const promise = fetch(
@@ -35,8 +35,7 @@ export class Meme {
         },
         body: JSON.stringify(this),
       }
-    ).then((r) => r.json());
-    promise.then((o) => {
+    ).then((r) => r.json()).then((o) => {
       Object.assign(this, o);
     });
     return promise;
