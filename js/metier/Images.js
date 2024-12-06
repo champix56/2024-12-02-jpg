@@ -9,14 +9,15 @@ class Images extends Array {
    * @param {Function} params  predicat du find
    */
   find(params) {
-    console.log(params);
-    super.find(params);
+    console.trace(params);
+    return super.find(params);
   }
   /**
    * chargement de la liste d'images a partir du serveur REST
    * @returns {Promise<Images>} promise<Images> (deja lu) du fetch
    */
   load() {
+    console.time("load-images");
     return fetch(`http://localhost:5679${this.#endpoint}`, {
       headers: { Accept: "application/json" },
       method: "GET",
@@ -25,7 +26,11 @@ class Images extends Array {
         console.log(r);
         return r.json();
       })
-      .then((a) => Object.assign(this, a));
+      .then((a) =>{
+        console.table(a);
+        Object.assign(this, a);
+        console.timeEnd("load-images")
+      });
   }
 }
 const images = new Images();
