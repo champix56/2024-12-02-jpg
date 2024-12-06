@@ -1,14 +1,14 @@
 import { Meme } from "./Meme.js";
 
 class Memes extends Array {
-  static #endpoint = "/memes";
-  static get endpoint() {
-    return this.#endpoint;
-  }
+  static endpoint = "/memes";
+  // static get endpoint() {
+  //   return this.endpoint;
+  // }
   constructor() {
     super();
   }
-  //static set endpoint(value){this.#endpoint=value;}
+  //static set endpoint(value){this.endpoint=value;}
   /**
    *   chargement Promiser vers REST pour les Memes
    * @returns {Promise<Memes>} promise de chargement de l'instance de Memes
@@ -52,5 +52,5 @@ class Memes extends Array {
     }
   }
 }
-export const memes = new Memes();
-export const promiseMemes = memes.load();
+export const memes:Memes = new Memes();
+export const promiseMemes:Promise<Memes> = memes.load();

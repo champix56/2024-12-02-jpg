@@ -2,7 +2,7 @@
  * class de gestion d'un meme
  */
 export class Meme {
-  id = undefined;
+  id:number|undefined = undefined;
   text = "";
   x = 0;
   y = 10;
@@ -12,7 +12,7 @@ export class Meme {
   italic = false;
   color = "#FFFFFF";
   imageId = -1;
-  #endpoint = "/memes";
+  static endpoint = "/memes";
   /**
    * constructor de meme
    */

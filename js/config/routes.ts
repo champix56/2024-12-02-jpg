@@ -1,7 +1,17 @@
 import { loadEditor } from "../editor.js";
 import { loadThumbnail } from "../thumbnail.js";
-
-export const routes = [
+interface IRouteObject{
+  name: string,
+  path?: RegExp,
+  url?: string,
+  loaderJs?:Function,
+  cssFile?:string,
+  template?:string,
+  message?:string,
+  status?:number,
+  statusText?:string
+}
+export const routes:Array<IRouteObject> = [
     {
       name: "Thumbnail",
       path: /^\/thumbnail$/,
@@ -20,5 +30,5 @@ export const routes = [
       name: "Home",
       path: /^\/?$/,
       url: "/pages/home/home.html",
-    },
+    }
   ];

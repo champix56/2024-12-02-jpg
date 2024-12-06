@@ -2,10 +2,14 @@ import { updateSVG } from "./commonsSvgFunctions.js";
 import { promiseImages } from "./metier/Images.js";
 import { Meme } from "./metier/Meme.js";
 import { memes, promiseMemes } from "./metier/Memes.js";
+import { router } from "./router.js";
 
 let currentMeme = new Meme();
-let editorRootSvg = undefined;
-export function loadEditor(params) {
+let editorRootSvg :Element|undefined|null= undefined;
+interface IEditorRoutePrams{
+  id?:undefined|string
+}
+export function loadEditor(params:IEditorRoutePrams) {
   editorRootSvg = document.querySelector("#wrapper svg");
   console.log(params);
   loadEditorEvent();
