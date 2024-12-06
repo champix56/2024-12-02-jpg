@@ -32,3 +32,12 @@ function loadNavbarEvents() {
   });
 }
 document.addEventListener("DOMContentLoaded", loadingDOM);
+
+window.addEventListener('offline',(evt)=>{
+  alert('plus de reseaux')
+})
+
+
+window.addEventListener('online',(evt)=>{
+  alert('retour du reseaux')
+})
