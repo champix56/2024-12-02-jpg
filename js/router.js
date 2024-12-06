@@ -20,16 +20,35 @@ var errorsRoutes = {
   404: {
     name: "error 404 not found",
     url: "/pages/errors/404.html",
-    status:404,
-    statusText:'not found',
-    loaderJs:function(){
-      document.title=`${location.href} ${this.status} ${this.statusText}`;
-      console.error(this.name+" chemin :"+this.pathName,location.href);
-      document.querySelectorAll('#wrapper a').forEach(a=>a.addEventListener('click',evt=>{
-        evt.preventDefault();
-        router.navigate('/');
-      }))
-    }
+    status: 404,
+    statusText: "not found",
+    loaderJs: function () {
+      document.title = `${location.href} ${this.status} ${this.statusText}`;
+      console.error(this.name + " chemin :" + this.pathName, location.href);
+      document.querySelectorAll("#wrapper a").forEach((a) =>
+        a.addEventListener("click", (evt) => {
+          evt.preventDefault();
+          router.navigate("/");
+        })
+      );
+    },
+  },
+  500: {
+    name: "error 500 internal server error",
+    url: "/pages/errors/404.html",
+    status: 500,
+    statusText: "internal server error",
+    loaderJs: function () {
+      document.title = `${location.href} ${this.status} ${this.statusText}`;
+      console.error(this.name + " chemin :" + this.pathName, location.href);
+      document.querySelectorAll("#wrapper a").innerHTML = this.message;
+      document.querySelectorAll("#wrapper a").forEach((a) =>
+        a.addEventListener("click", (evt) => {
+          evt.preventDefault();
+          router.navigate("/");
+        })
+      );
+    },
   },
 };
 /* besoins routeur
@@ -62,9 +81,8 @@ function Router(rootNode) {
       });
       if (undefined !== route) {
         route.params = m.groups;
-      }
-      else{
-        route=errorsRoutes[404];
+      } else {
+        route = errorsRoutes[404];
       }
       currentRoute = route;
     }
@@ -113,10 +131,11 @@ function Router(rootNode) {
    * @param {string} pathName path to navigate (start with '/')
    */
   this.navigate = navigate;
-  function navigate(pathName = "/") {
+  function navigate(pathName = "/", message) {
     currentRoute = undefined;
     if (Number.isInteger(pathName)) {
       currentRoute = errorsRoutes[pathName];
+      currentRoute.message = message;
     }
     changePathName(pathName);
 
